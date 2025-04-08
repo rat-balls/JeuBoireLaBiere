@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlxmd3r25i16x"]
+[gd_scene load_steps=10 format=3 uid="uid://dlxmd3r25i16x"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_ff0yo"]
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
-[ext_resource type="Texture2D" uid="uid://cmnpwnu4wgne2" path="res://icon.svg" id="2_0xsrc"]
 [ext_resource type="Script" path="res://Scripts/Camera2d.cs" id="2_ddfpk"]
+[ext_resource type="Texture2D" uid="uid://cg3max1qatald" path="res://Assets/Sprites/istockphoto-802636540-612x612.jpg" id="4_v3h4w"]
+[ext_resource type="Texture2D" uid="uid://bfc68j0gdq2o7" path="res://Assets/Sprites/beer-3804654_1280.webp" id="5_fwp6m"]
 [ext_resource type="PackedScene" uid="uid://dq2ath804n4b7" path="res://Scenes/platform.tscn" id="6_wcihk"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_74inm"]
@@ -30,9 +31,15 @@ process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("2_ddfpk")
 
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+modulate = Color(0.619608, 0.619608, 0.639216, 1)
+z_index = -15
+position = Vector2(-3, -6.99999)
+scale = Vector2(2.7, 2.3)
+texture = ExtResource("4_v3h4w")
+
 [node name="Death" type="Area2D" parent="Camera2D"]
-position = Vector2(0, -116)
-scale = Vector2(1, 1.8)
+position = Vector2(0, 80)
 collision_layer = 2
 collision_mask = 4
 script = SubResource("CSharpScript_74inm")
@@ -42,11 +49,11 @@ position = Vector2(0, 269)
 shape = SubResource("WorldBoundaryShape2D_gkde7")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D/Death"]
-modulate = Color(1, 0.819608, 0.376471, 0.847059)
+modulate = Color(1, 1, 1, 0.721569)
 z_index = 10
-position = Vector2(-15.4999, 687.611)
-scale = Vector2(18.7734, 6.55642)
-texture = ExtResource("2_0xsrc")
+position = Vector2(197.5, 766)
+scale = Vector2(2.91503, 1)
+texture = ExtResource("5_fwp6m")
 
 [node name="LeftBorder" type="StaticBody2D" parent="Camera2D"]
 position = Vector2(-813, 0)
@@ -54,13 +61,6 @@ position = Vector2(-813, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LeftBorder"]
 rotation = 1.58825
 shape = SubResource("WorldBoundaryShape2D_ydwrq")
-
-[node name="Timer1" type="Label" parent="."]
-offset_left = -597.0
-offset_top = -315.0
-offset_right = -265.0
-offset_bottom = -229.0
-text = "Test"
 
 [node name="Platform" parent="." instance=ExtResource("6_wcihk")]
 position = Vector2(-5, 220)
