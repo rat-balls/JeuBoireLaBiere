@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlxmd3r25i16x"]
+
+[ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
+[ext_resource type="Texture2D" uid="uid://cmnpwnu4wgne2" path="res://icon.svg" id="2_0xsrc"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkde7"]
+
+[node name="Game" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_k4nsg")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 269)
+shape = SubResource("WorldBoundaryShape2D_gkde7")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0, 283)
+scale = Vector2(14.0859, 0.234375)
+texture = ExtResource("2_0xsrc")
+
+[node name="Timer2" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Timer1" type="Label" parent="."]
+offset_left = -597.0
+offset_top = -315.0
+offset_right = -265.0
+offset_bottom = -229.0
+text = "Test"
