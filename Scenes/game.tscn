@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dlxmd3r25i16x"]
+[gd_scene load_steps=15 format=3 uid="uid://dlxmd3r25i16x"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_ff0yo"]
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://d1g1pesvibsu6" path="res://Assets/Sprites/bière.png" id="6_7pg3a"]
 [ext_resource type="PackedScene" uid="uid://dq2ath804n4b7" path="res://Scenes/platform.tscn" id="6_wcihk"]
 [ext_resource type="Texture2D" uid="uid://cym647yuthn2d" path="res://Assets/Sprites/mousse.png" id="7_jxppo"]
-[ext_resource type="Script" path="res://Scenes/Pause.cs" id="9_aucgh"]
+[ext_resource type="Script" path="res://Scripts/Score.cs" id="9_6jhyw"]
+[ext_resource type="Script" path="res://Scripts/Pause.cs" id="9_aucgh"]
+[ext_resource type="AudioStream" uid="uid://dtowyxf5leihj" path="res://Assets/Music/05 - Briganté.mp3" id="10_q3enl"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_74inm"]
 script/source = "using Godot;
@@ -31,7 +33,6 @@ script = ExtResource("1_ff0yo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
-position_smoothing_enabled = true
 script = ExtResource("2_ddfpk")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
@@ -80,6 +81,26 @@ position = Vector2(-813, 0)
 rotation = 1.58825
 shape = SubResource("WorldBoundaryShape2D_ydwrq")
 
+[node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
+stream = ExtResource("10_q3enl")
+volume_db = -5.0
+autoplay = true
+
+[node name="UI" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Score" type="Label" parent="Camera2D/UI"]
+layout_mode = 0
+offset_left = -789.0
+offset_top = -439.0
+offset_right = -749.0
+offset_bottom = -416.0
+text = "Test"
+script = ExtResource("9_6jhyw")
+
 [node name="Platform" parent="." instance=ExtResource("6_wcihk")]
 position = Vector2(-5, 220)
 
@@ -97,4 +118,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_aucgh")
 
+[connection signal="PauseSignal" from="CharacterBody2D" to="Pause" method="_on_character_body_2d_pause_signal"]
 [connection signal="body_entered" from="Camera2D/Death" to="." method="_on_death_body_entered"]

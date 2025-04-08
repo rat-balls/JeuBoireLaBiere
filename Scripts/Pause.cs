@@ -10,8 +10,11 @@ public partial class Pause : Control
 			PauseGame();
 		}
 	}
-
 	void PauseGame() {
 		GetTree().Paused = !GetTree().Paused;
+	}
+
+	void _on_character_body_2d_pause_signal() {
+		GD.Print("Here");
 	}
 }

@@ -15,12 +15,19 @@ public partial class CharacterMovement : CharacterBody2D
 
 	Label _timer1;
 
+	[Signal]
+	public delegate void PauseSignalEventHandler();
+
 	public override void _Ready() {
 		_timer1 = GetParent().GetNode<Label>("Timer1");
 	}
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
+
+		if(Input.IsActionJustPressed("Pause")) {
+			EmitSignal(SignalName.PauseSignal);
+		}
 
 		if(IsOnFloor()) {
 			jumped = false;
