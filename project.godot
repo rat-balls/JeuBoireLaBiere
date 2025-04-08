@@ -26,6 +26,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="JeuBoire"
 
+[global_group]
+
+Player=""
+
 [input]
 
 Left={
