@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dlxmd3r25i16x"]
+[gd_scene load_steps=12 format=3 uid="uid://dlxmd3r25i16x"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_ff0yo"]
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
 [ext_resource type="Script" path="res://Scripts/Camera2d.cs" id="2_ddfpk"]
 [ext_resource type="Texture2D" uid="uid://cg3max1qatald" path="res://Assets/Sprites/istockphoto-802636540-612x612.jpg" id="4_v3h4w"]
 [ext_resource type="Texture2D" uid="uid://bfc68j0gdq2o7" path="res://Assets/Sprites/beer-3804654_1280.webp" id="5_fwp6m"]
+[ext_resource type="Texture2D" uid="uid://d1g1pesvibsu6" path="res://Assets/Sprites/bière.png" id="6_7pg3a"]
 [ext_resource type="PackedScene" uid="uid://dq2ath804n4b7" path="res://Scenes/platform.tscn" id="6_wcihk"]
+[ext_resource type="Texture2D" uid="uid://cym647yuthn2d" path="res://Assets/Sprites/mousse.png" id="7_jxppo"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_74inm"]
 script/source = "using Godot;
@@ -49,11 +51,26 @@ position = Vector2(0, 269)
 shape = SubResource("WorldBoundaryShape2D_gkde7")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D/Death"]
+visible = false
 modulate = Color(1, 1, 1, 0.6)
 z_index = 10
 position = Vector2(205, 579)
 scale = Vector2(2.91503, 1)
 texture = ExtResource("5_fwp6m")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Camera2D/Death"]
+modulate = Color(1, 1, 1, 0.858824)
+z_index = 10
+position = Vector2(313.476, 581)
+scale = Vector2(2.91503, 1)
+texture = ExtResource("6_7pg3a")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Camera2D/Death"]
+modulate = Color(1, 1, 1, 0.6)
+z_index = 10
+position = Vector2(-23.524, 139)
+scale = Vector2(2.91503, 1)
+texture = ExtResource("7_jxppo")
 
 [node name="LeftBorder" type="StaticBody2D" parent="Camera2D"]
 position = Vector2(-813, 0)
