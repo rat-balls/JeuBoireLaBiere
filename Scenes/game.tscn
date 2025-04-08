@@ -4,12 +4,21 @@
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
 [ext_resource type="Texture2D" uid="uid://cmnpwnu4wgne2" path="res://icon.svg" id="2_0xsrc"]
 [ext_resource type="Script" path="res://Scripts/Camera2d.cs" id="2_ddfpk"]
-[ext_resource type="Script" path="res://Scripts/Death.cs" id="4_bf23i"]
 [ext_resource type="PackedScene" uid="uid://dq2ath804n4b7" path="res://Scenes/platform.tscn" id="6_wcihk"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ydwrq"]
+[sub_resource type="CSharpScript" id="CSharpScript_74inm"]
+script/source = "using Godot;
+using System;
+
+public partial class Death : Area2D
+{
+	
+}
+"
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkde7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ydwrq"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_ff0yo")
@@ -21,29 +30,29 @@ process_callback = 0
 position_smoothing_enabled = true
 script = ExtResource("2_ddfpk")
 
+[node name="Death" type="Area2D" parent="Camera2D"]
+position = Vector2(0, -116)
+scale = Vector2(1, 1.8)
+collision_layer = 2
+collision_mask = 4
+script = SubResource("CSharpScript_74inm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Death"]
+position = Vector2(0, 269)
+shape = SubResource("WorldBoundaryShape2D_gkde7")
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/Death"]
+modulate = Color(1, 1, 0.172549, 1)
+position = Vector2(0, 283)
+scale = Vector2(14.0859, 0.234375)
+texture = ExtResource("2_0xsrc")
+
 [node name="LeftBorder" type="StaticBody2D" parent="Camera2D"]
 position = Vector2(-813, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LeftBorder"]
 rotation = 1.58825
 shape = SubResource("WorldBoundaryShape2D_ydwrq")
-
-[node name="Death" type="Area2D" parent="."]
-position = Vector2(0, -116)
-scale = Vector2(1, 1.8)
-collision_layer = 2
-collision_mask = 4
-script = ExtResource("4_bf23i")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
-position = Vector2(0, 269)
-shape = SubResource("WorldBoundaryShape2D_gkde7")
-
-[node name="Sprite2D" type="Sprite2D" parent="Death"]
-modulate = Color(1, 1, 0.172549, 1)
-position = Vector2(0, 283)
-scale = Vector2(14.0859, 0.234375)
-texture = ExtResource("2_0xsrc")
 
 [node name="Timer1" type="Label" parent="."]
 offset_left = -597.0
@@ -61,4 +70,4 @@ position = Vector2(252, 129)
 [node name="Platform3" parent="." instance=ExtResource("6_wcihk")]
 position = Vector2(504, 27)
 
-[connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]
+[connection signal="body_entered" from="Camera2D/Death" to="." method="_on_death_body_entered"]
