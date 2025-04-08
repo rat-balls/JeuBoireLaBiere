@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlxmd3r25i16x"]
+[gd_scene load_steps=5 format=3 uid="uid://dlxmd3r25i16x"]
 
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
 [ext_resource type="Texture2D" uid="uid://cmnpwnu4wgne2" path="res://icon.svg" id="2_0xsrc"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkde7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gi6w"]
 
 [node name="Game" type="Node2D"]
 
@@ -22,13 +24,45 @@ position = Vector2(0, 283)
 scale = Vector2(14.0859, 0.234375)
 texture = ExtResource("2_0xsrc")
 
-[node name="Timer2" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-
 [node name="Timer1" type="Label" parent="."]
 offset_left = -597.0
 offset_top = -315.0
 offset_right = -265.0
 offset_bottom = -229.0
 text = "Test"
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-328, 42)
+scale = Vector2(7.12, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(1.90735e-06, 0.499999)
+scale = Vector2(0.15625, 0.148438)
+texture = ExtResource("2_0xsrc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_0gi6w")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(296, 93)
+scale = Vector2(7.12, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(1.90735e-06, 0.499999)
+scale = Vector2(0.15625, 0.148438)
+texture = ExtResource("2_0xsrc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_0gi6w")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(585, -57)
+scale = Vector2(7.12, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
+position = Vector2(1.90735e-06, 0.499999)
+scale = Vector2(0.15625, 0.148438)
+texture = ExtResource("2_0xsrc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource("RectangleShape2D_0gi6w")

@@ -11,6 +11,8 @@ public partial class CharacterMovement : CharacterBody2D
 	private bool needJump = false;
 	private bool jumped = false;
 
+	private bool coyoteAvailable = false;
+
 	Label _timer1;
 
 	public override void _Ready() {
@@ -27,7 +29,8 @@ public partial class CharacterMovement : CharacterBody2D
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
-			if(!jumped) {
+			if(!jumped && coyoteAvailable && CoyoteTimer <= 0.0f) {
+				coyoteAvailable = false;
 				CoyoteTimer = 1f;
 			} 
 			velocity += GetGravity() * (float)delta;
@@ -39,7 +42,7 @@ public partial class CharacterMovement : CharacterBody2D
 		}
 
 		// Handle Jump.
-		if (needJump && IsOnFloor() || needJump && CoyoteTimer != 0.0f)
+		if (needJump && IsOnFloor() || needJump && CoyoteTimer > 0.0f)
 		{
 			jumped = true;
 			velocity.Y = JumpVelocity;
@@ -62,16 +65,16 @@ public partial class CharacterMovement : CharacterBody2D
 		Velocity = velocity;
 		MoveAndSlide();
 
-		if(CoyoteTimer > 0) {
-			CoyoteTimer -= (float)(6f * delta);
+		if(CoyoteTimer > 0.0f) {
+			CoyoteTimer -= (float)(5f * delta);
+		} else if (CoyoteTimer <= 0.0f && IsOnFloor()) {
+			coyoteAvailable = true;
 		}
 
-		if(JumpInputTimer > 0) {
-			JumpInputTimer -= (float)(6f * delta);
-		} else if (JumpInputTimer < 0) {
+		if(JumpInputTimer > 0.0f) {
+			JumpInputTimer -= (float)(7f * delta);
+		} else if (JumpInputTimer <= 0.0f) {
 			needJump = false;
 		}
-
-		_timer1.Text = "JumpInp Timer = " + JumpInputTimer;
 	}
 }
