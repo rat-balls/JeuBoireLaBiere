@@ -36,7 +36,7 @@ public partial class CharacterMovement : CharacterBody2D
 			velocity += GetGravity() * (float)delta;
 		}
 
-		if(Input.IsActionJustPressed("Jump")) {
+		if(Input.IsActionPressed("Jump")) {
 			needJump = true;
 			JumpInputTimer = 1f;
 		}

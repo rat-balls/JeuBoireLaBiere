@@ -3,10 +3,13 @@
 [ext_resource type="Script" path="res://Scripts/CharacterMovement.cs" id="1_rtumk"]
 [ext_resource type="Texture2D" uid="uid://cmnpwnu4wgne2" path="res://icon.svg" id="2_hla1p"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6rova"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sm16e"]
+radius = 3.76344
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(3.72, 3.68)
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_rtumk")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
@@ -14,5 +17,16 @@ position = Vector2(4.76837e-07, -4.76837e-07)
 scale = Vector2(0.15625, 0.234375)
 texture = ExtResource("2_hla1p")
 
+[node name="CharacterCollision3" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_sm16e")
+
+[node name="CharacterCollision2" type="CollisionShape2D" parent="."]
+position = Vector2(6.18279, 0)
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_sm16e")
+
 [node name="CharacterCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_6rova")
+position = Vector2(-6.18279, 0)
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_sm16e")

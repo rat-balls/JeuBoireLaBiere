@@ -1,25 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlxmd3r25i16x"]
+[gd_scene load_steps=9 format=3 uid="uid://dlxmd3r25i16x"]
 
+[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_ff0yo"]
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
 [ext_resource type="Texture2D" uid="uid://cmnpwnu4wgne2" path="res://icon.svg" id="2_0xsrc"]
+[ext_resource type="Script" path="res://Scripts/Camera2d.cs" id="2_ddfpk"]
+[ext_resource type="Script" path="res://Scripts/Death.cs" id="4_bf23i"]
+[ext_resource type="PackedScene" uid="uid://dq2ath804n4b7" path="res://Scenes/platform.tscn" id="6_wcihk"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ydwrq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkde7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0gi6w"]
-
 [node name="Game" type="Node2D"]
+script = ExtResource("1_ff0yo")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_k4nsg")]
+[node name="CharacterBody2D" parent="." groups=["Player"] instance=ExtResource("1_k4nsg")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+position_smoothing_enabled = true
+script = ExtResource("2_ddfpk")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="LeftBorder" type="StaticBody2D" parent="Camera2D"]
+position = Vector2(-813, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LeftBorder"]
+rotation = 1.58825
+shape = SubResource("WorldBoundaryShape2D_ydwrq")
+
+[node name="Death" type="Area2D" parent="."]
+position = Vector2(0, -116)
+scale = Vector2(1, 1.8)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("4_bf23i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Death"]
 position = Vector2(0, 269)
 shape = SubResource("WorldBoundaryShape2D_gkde7")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Death"]
+modulate = Color(1, 1, 0.172549, 1)
 position = Vector2(0, 283)
 scale = Vector2(14.0859, 0.234375)
 texture = ExtResource("2_0xsrc")
@@ -31,38 +52,13 @@ offset_right = -265.0
 offset_bottom = -229.0
 text = "Test"
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(-328, 42)
-scale = Vector2(7.12, 1)
+[node name="Platform" parent="." instance=ExtResource("6_wcihk")]
+position = Vector2(-5, 220)
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-position = Vector2(1.90735e-06, 0.499999)
-scale = Vector2(0.15625, 0.148438)
-texture = ExtResource("2_0xsrc")
+[node name="Platform2" parent="." instance=ExtResource("6_wcihk")]
+position = Vector2(252, 129)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource("RectangleShape2D_0gi6w")
+[node name="Platform3" parent="." instance=ExtResource("6_wcihk")]
+position = Vector2(504, 27)
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(296, 93)
-scale = Vector2(7.12, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
-position = Vector2(1.90735e-06, 0.499999)
-scale = Vector2(0.15625, 0.148438)
-texture = ExtResource("2_0xsrc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-shape = SubResource("RectangleShape2D_0gi6w")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(585, -57)
-scale = Vector2(7.12, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
-position = Vector2(1.90735e-06, 0.499999)
-scale = Vector2(0.15625, 0.148438)
-texture = ExtResource("2_0xsrc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-shape = SubResource("RectangleShape2D_0gi6w")
+[connection signal="body_entered" from="Death" to="." method="_on_death_body_entered"]
