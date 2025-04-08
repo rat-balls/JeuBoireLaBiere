@@ -39,7 +39,7 @@ scale = Vector2(2.7, 2.3)
 texture = ExtResource("4_v3h4w")
 
 [node name="Death" type="Area2D" parent="Camera2D"]
-position = Vector2(0, 80)
+position = Vector2(0, 282)
 collision_layer = 2
 collision_mask = 4
 script = SubResource("CSharpScript_74inm")
@@ -49,9 +49,9 @@ position = Vector2(0, 269)
 shape = SubResource("WorldBoundaryShape2D_gkde7")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D/Death"]
-modulate = Color(1, 1, 1, 0.721569)
+modulate = Color(1, 1, 1, 0.6)
 z_index = 10
-position = Vector2(197.5, 766)
+position = Vector2(205, 579)
 scale = Vector2(2.91503, 1)
 texture = ExtResource("5_fwp6m")
 
