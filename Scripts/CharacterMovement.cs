@@ -14,7 +14,7 @@ public partial class CharacterMovement : CharacterBody2D
 	Label _timer1;
 
 	public override void _Ready() {
-		_timer1 = GetNode<Label>("Timer1");
+		_timer1 = GetParent().GetNode<Label>("Timer1");
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -63,12 +63,12 @@ public partial class CharacterMovement : CharacterBody2D
 		MoveAndSlide();
 
 		if(CoyoteTimer > 0) {
-			CoyoteTimer -= (float)(10f * delta);
+			CoyoteTimer -= (float)(6f * delta);
 		}
 
 		if(JumpInputTimer > 0) {
-			JumpInputTimer -= (float)(10f * delta);
-		} else if (JumpInputTimer == 0) {
+			JumpInputTimer -= (float)(6f * delta);
+		} else if (JumpInputTimer < 0) {
 			needJump = false;
 		}
 
