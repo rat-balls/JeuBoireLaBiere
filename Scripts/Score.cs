@@ -9,6 +9,6 @@ public partial class Score : Label
 	public override void _Process(double delta)
 	{
 		score += (float)(10f * delta);
-		Text = Mathf.FloorToInt(score).ToString();
+		Text = "Score : " + Mathf.FloorToInt(score).ToString();
 	}
 }

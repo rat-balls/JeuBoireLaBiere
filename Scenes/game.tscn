@@ -1,6 +1,5 @@
-[gd_scene load_steps=15 format=3 uid="uid://dlxmd3r25i16x"]
+[gd_scene load_steps=14 format=3 uid="uid://dlxmd3r25i16x"]
 
-[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_ff0yo"]
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
 [ext_resource type="Script" path="res://Scripts/Camera2d.cs" id="2_ddfpk"]
 [ext_resource type="Texture2D" uid="uid://cg3max1qatald" path="res://Assets/Sprites/istockphoto-802636540-612x612.jpg" id="4_v3h4w"]
@@ -27,7 +26,6 @@ public partial class Death : Area2D
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ydwrq"]
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_ff0yo")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_k4nsg")]
 
@@ -93,13 +91,69 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Score" type="Label" parent="Camera2D/UI"]
+z_index = 111
 layout_mode = 0
 offset_left = -789.0
 offset_top = -439.0
 offset_right = -749.0
 offset_bottom = -416.0
-text = "Test"
+theme_override_font_sizes/font_size = 39
+text = "Score : 0"
 script = ExtResource("9_6jhyw")
+
+[node name="PauseScreen" type="ColorRect" parent="Camera2D/UI"]
+process_mode = 2
+visible = false
+z_index = 100
+layout_mode = 0
+offset_left = -827.0
+offset_top = -474.0
+offset_right = 825.0
+offset_bottom = 476.0
+color = Color(0, 0, 0, 0.572549)
+
+[node name="DrinkingProgress" type="Label" parent="Camera2D/UI/PauseScreen"]
+offset_left = 518.0
+offset_top = 433.0
+offset_right = 1136.0
+offset_bottom = 516.0
+theme_override_font_sizes/font_size = 60
+text = "Drinking in progress.."
+horizontal_alignment = 1
+
+[node name="PAUSED" type="Label" parent="Camera2D/UI/PauseScreen"]
+visible = false
+layout_mode = 0
+offset_left = 673.0
+offset_top = 281.0
+offset_right = 982.0
+offset_bottom = 391.0
+theme_override_font_sizes/font_size = 80
+text = "PAUSED"
+
+[node name="Restart" type="Button" parent="Camera2D/UI/PauseScreen"]
+visible = false
+layout_mode = 0
+offset_left = 749.0
+offset_top = 578.0
+offset_right = 912.0
+offset_bottom = 641.0
+theme_override_colors/font_hover_color = Color(0.858218, 0.858218, 0.858218, 1)
+theme_override_colors/font_pressed_color = Color(0.695503, 0.695503, 0.695503, 1)
+theme_override_font_sizes/font_size = 40
+text = "Restart"
+
+[node name="Menu" type="Button" parent="Camera2D/UI/PauseScreen"]
+visible = false
+layout_mode = 0
+offset_left = 749.0
+offset_top = 665.0
+offset_right = 912.0
+offset_bottom = 728.0
+theme_override_colors/font_hover_color = Color(0.858218, 0.858218, 0.858218, 1)
+theme_override_colors/font_pressed_color = Color(0.695503, 0.695503, 0.695503, 1)
+theme_override_font_sizes/font_size = 40
+text = "Menu"
 
 [node name="Platform" parent="." instance=ExtResource("6_wcihk")]
 position = Vector2(-5, 220)
@@ -119,4 +173,6 @@ offset_bottom = 40.0
 script = ExtResource("9_aucgh")
 
 [connection signal="PauseSignal" from="CharacterBody2D" to="Pause" method="_on_character_body_2d_pause_signal"]
-[connection signal="body_entered" from="Camera2D/Death" to="." method="_on_death_body_entered"]
+[connection signal="body_entered" from="Camera2D/Death" to="Pause" method="_on_death_body_entered"]
+[connection signal="button_up" from="Camera2D/UI/PauseScreen/Restart" to="Pause" method="_on_restart_button_up"]
+[connection signal="button_up" from="Camera2D/UI/PauseScreen/Menu" to="Pause" method="_on_menu_button_up"]
