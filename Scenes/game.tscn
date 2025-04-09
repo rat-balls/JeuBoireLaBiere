@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlxmd3r25i16x"]
+[gd_scene load_steps=15 format=3 uid="uid://dlxmd3r25i16x"]
 
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
 [ext_resource type="Script" uid="uid://dase6q5v5u5o" path="res://Scripts/connect.gd" id="1_o5yvi"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dq2ath804n4b7" path="res://Scenes/platform.tscn" id="6_wcihk"]
 [ext_resource type="Texture2D" uid="uid://cym647yuthn2d" path="res://Assets/Sprites/mousse.png" id="7_jxppo"]
 [ext_resource type="Script" uid="uid://b3mwa5mf8t3tb" path="res://Scripts/score.gd" id="7_r51r2"]
+[ext_resource type="AudioStream" uid="uid://cv7jenkovuwly" path="res://Assets/Music/Fumer en Paix.mp3" id="8_rku1e"]
 [ext_resource type="Script" uid="uid://w1pm0e3axyqp" path="res://Scripts/pause.gd" id="9_sil7u"]
 [ext_resource type="PackedScene" uid="uid://ktm7k0co2o7l" path="res://addons/mqtt/mqtt.tscn" id="10_ldgsr"]
 
@@ -86,7 +87,8 @@ rotation = 1.58825
 shape = SubResource("WorldBoundaryShape2D_ydwrq")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Game/Camera2D"]
-volume_db = -5.0
+stream = ExtResource("8_rku1e")
+volume_db = -6.486
 autoplay = true
 
 [node name="Platform" parent="Game" instance=ExtResource("6_wcihk")]
@@ -195,6 +197,8 @@ text = "Menu"
 [node name="MQTT" parent="." instance=ExtResource("10_ldgsr")]
 process_mode = 3
 
+[connection signal="beerLevel" from="." to="Game/Camera2D" method="_on_control_beer_level"]
+[connection signal="pause" from="." to="Game/Pause" method="_on_control_pause"]
 [connection signal="body_entered" from="Game/Camera2D/Death" to="Game/Pause" method="_on_death_body_entered"]
 [connection signal="button_up" from="HUD/UI/PauseScreen/Restart" to="Game/Pause" method="_on_restart_button_up"]
 [connection signal="button_up" from="HUD/UI/PauseScreen/Menu" to="Game/Pause" method="_on_menu_button_up"]

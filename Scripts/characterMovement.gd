@@ -14,10 +14,14 @@ var coyoteAvailable = false;
 
 signal pause;
 
+@onready var mqtt = $"../../MQTT"
+var fakeLvl = 0;
+
 func _physics_process(delta):
 	
-	if(Input.is_action_just_pressed("Pause")):
-		emit_signal("pause");
+	if Input.is_action_just_pressed("ui_up"):
+		fakeLvl += (randi() % 3);
+		mqtt.publish("jeuboire/beerLvl", str(fakeLvl))
 	
 	if is_on_floor():
 		jumped = false;

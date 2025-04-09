@@ -9,8 +9,8 @@ size = Vector2(37.3541, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kmae"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kon2v"]
-radius = 27.3556
-height = 247.934
+radius = 43.5664
+height = 105.37
 
 [node name="Platform" type="StaticBody2D"]
 collision_mask = 4
@@ -39,7 +39,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 18)
+position = Vector2(0, 37)
 scale = Vector2(0.987, 0.121)
 shape = SubResource("CapsuleShape2D_kon2v")
 
