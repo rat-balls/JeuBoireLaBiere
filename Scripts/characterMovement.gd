@@ -12,12 +12,7 @@ var jumped = false;
 
 var coyoteAvailable = false;
 
-var _timer1: Label;
-
 signal pause;
-
-func _ready():
-	_timer1 = get_parent().get_node("Timer1");
 
 func _physics_process(delta):
 	
@@ -63,6 +58,3 @@ func _physics_process(delta):
 		JumpInputTimer -= (float)(7 * delta);
 	elif (JumpInputTimer <= 0.0):
 		needJump = false;
-		
-	print(CoyoteTimer)
-	

@@ -3,7 +3,7 @@ extends Control
 var PauseScreen: ColorRect;
 
 func _ready():
-	PauseScreen = get_parent().get_node("Camera2D/UI/PauseScreen");
+	PauseScreen = get_parent().get_parent().get_node("HUD/UI/PauseScreen");
 
 func _process(delta):
 	if(Input.is_action_just_pressed("Pause")):

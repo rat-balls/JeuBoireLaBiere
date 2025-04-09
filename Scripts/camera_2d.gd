@@ -6,11 +6,12 @@ var spawnTimer = 1.0;
 var spawnTimer1 = 0.0;
 var spawnTimer2 = 1.5;
 var rand = RandomNumberGenerator.new();
-var platform: PackedScene = load("res://Scenes/Platform.tscn");
+var platform: PackedScene;
 var beer: Area2D;
 var beerProg = -25;
 
 func _ready():
+	platform = load("res://Scenes/platform.tscn");
 	beer = get_node("Death");
 
 func _process(delta):

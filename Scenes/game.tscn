@@ -1,44 +1,57 @@
 [gd_scene load_steps=12 format=3 uid="uid://dlxmd3r25i16x"]
 
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
-[ext_resource type="Script" path="res://Scripts/camera_2d.gd" id="2_3upla"]
+[ext_resource type="Script" uid="uid://dcfuxp5md03dd" path="res://Scripts/camera_2d.gd" id="2_3upla"]
 [ext_resource type="Texture2D" uid="uid://cg3max1qatald" path="res://Assets/Sprites/istockphoto-802636540-612x612.jpg" id="4_v3h4w"]
 [ext_resource type="Texture2D" uid="uid://bfc68j0gdq2o7" path="res://Assets/Sprites/beer-3804654_1280.webp" id="5_fwp6m"]
 [ext_resource type="Texture2D" uid="uid://d1g1pesvibsu6" path="res://Assets/Sprites/bière.png" id="6_7pg3a"]
 [ext_resource type="PackedScene" uid="uid://dq2ath804n4b7" path="res://Scenes/platform.tscn" id="6_wcihk"]
 [ext_resource type="Texture2D" uid="uid://cym647yuthn2d" path="res://Assets/Sprites/mousse.png" id="7_jxppo"]
-[ext_resource type="Script" path="res://Scripts/score.gd" id="7_r51r2"]
-[ext_resource type="Script" path="res://Scripts/pause.gd" id="9_sil7u"]
+[ext_resource type="Script" uid="uid://b3mwa5mf8t3tb" path="res://Scripts/score.gd" id="7_r51r2"]
+[ext_resource type="Script" uid="uid://w1pm0e3axyqp" path="res://Scripts/pause.gd" id="9_sil7u"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkde7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ydwrq"]
 
-[node name="Game" type="Node2D"]
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_k4nsg")]
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -15
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Background" type="TextureRect" parent="BG"]
+modulate = Color(0.454902, 0.447059, 0.470588, 1)
+z_index = -100
+z_as_relative = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_v3h4w")
+
+[node name="Game" type="Node2D" parent="."]
+
+[node name="CharacterBody2D" parent="Game" instance=ExtResource("1_k4nsg")]
+
+[node name="Camera2D" type="Camera2D" parent="Game"]
 process_callback = 0
 script = ExtResource("2_3upla")
 
-[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
-modulate = Color(0.619608, 0.619608, 0.639216, 1)
-z_index = -15
-position = Vector2(-3, -6.99999)
-scale = Vector2(2.7, 2.3)
-texture = ExtResource("4_v3h4w")
-
-[node name="Death" type="Area2D" parent="Camera2D"]
+[node name="Death" type="Area2D" parent="Game/Camera2D"]
 position = Vector2(0, 282)
 collision_layer = 2
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Death"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Camera2D/Death"]
 position = Vector2(0, 269)
 shape = SubResource("WorldBoundaryShape2D_gkde7")
 
-[node name="Sprite2D" type="Sprite2D" parent="Camera2D/Death"]
+[node name="Sprite2D" type="Sprite2D" parent="Game/Camera2D/Death"]
 visible = false
 modulate = Color(1, 1, 1, 0.6)
 z_index = 10
@@ -46,70 +59,100 @@ position = Vector2(205, 579)
 scale = Vector2(2.91503, 1)
 texture = ExtResource("5_fwp6m")
 
-[node name="Sprite2D3" type="Sprite2D" parent="Camera2D/Death"]
+[node name="Sprite2D3" type="Sprite2D" parent="Game/Camera2D/Death"]
 modulate = Color(1, 1, 1, 0.858824)
 z_index = 10
 position = Vector2(313.476, 581)
 scale = Vector2(2.91503, 1)
 texture = ExtResource("6_7pg3a")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Camera2D/Death"]
+[node name="Sprite2D2" type="Sprite2D" parent="Game/Camera2D/Death"]
 modulate = Color(1, 1, 1, 0.6)
 z_index = 10
 position = Vector2(-23.524, 139)
 scale = Vector2(2.91503, 1)
 texture = ExtResource("7_jxppo")
 
-[node name="LeftBorder" type="StaticBody2D" parent="Camera2D"]
+[node name="LeftBorder" type="StaticBody2D" parent="Game/Camera2D"]
 position = Vector2(-813, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/LeftBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Camera2D/LeftBorder"]
 rotation = 1.58825
 shape = SubResource("WorldBoundaryShape2D_ydwrq")
 
-[node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
+[node name="Music" type="AudioStreamPlayer2D" parent="Game/Camera2D"]
 volume_db = -5.0
 autoplay = true
 
-[node name="UI" type="Control" parent="Camera2D"]
+[node name="Platform" parent="Game" instance=ExtResource("6_wcihk")]
+position = Vector2(-5, 220)
+
+[node name="Platform2" parent="Game" instance=ExtResource("6_wcihk")]
+position = Vector2(252, 129)
+
+[node name="Platform3" parent="Game" instance=ExtResource("6_wcihk")]
+position = Vector2(504, 27)
+
+[node name="Pause" type="Control" parent="Game"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_sil7u")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="HUD"]
+z_index = -15
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Score" type="Label" parent="Camera2D/UI"]
+[node name="Score" type="Label" parent="HUD/UI"]
 z_index = 111
-layout_mode = 0
-offset_left = -789.0
-offset_top = -439.0
-offset_right = -749.0
-offset_bottom = -416.0
+layout_mode = 1
+offset_right = 157.0
+offset_bottom = 54.0
 theme_override_font_sizes/font_size = 39
 text = "Score : 0"
 script = ExtResource("7_r51r2")
 
-[node name="PauseScreen" type="ColorRect" parent="Camera2D/UI"]
+[node name="PauseScreen" type="ColorRect" parent="HUD/UI"]
 process_mode = 2
 visible = false
 z_index = 100
-layout_mode = 0
-offset_left = -827.0
-offset_top = -474.0
-offset_right = 825.0
-offset_bottom = 476.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 0.572549)
 
-[node name="DrinkingProgress" type="Label" parent="Camera2D/UI/PauseScreen"]
-layout_mode = 0
-offset_left = 518.0
-offset_top = 433.0
-offset_right = 1136.0
-offset_bottom = 516.0
+[node name="DrinkingProgress" type="Label" parent="HUD/UI/PauseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -309.0
+offset_top = -41.5
+offset_right = 309.0
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 60
 text = "Drinking in progress.."
 horizontal_alignment = 1
 
-[node name="PAUSED" type="Label" parent="Camera2D/UI/PauseScreen"]
+[node name="PAUSED" type="Label" parent="HUD/UI/PauseScreen"]
 visible = false
 layout_mode = 0
 offset_left = 673.0
@@ -119,7 +162,7 @@ offset_bottom = 391.0
 theme_override_font_sizes/font_size = 80
 text = "PAUSED"
 
-[node name="Restart" type="Button" parent="Camera2D/UI/PauseScreen"]
+[node name="Restart" type="Button" parent="HUD/UI/PauseScreen"]
 visible = false
 layout_mode = 0
 offset_left = 749.0
@@ -131,7 +174,7 @@ theme_override_colors/font_pressed_color = Color(0.695503, 0.695503, 0.695503, 1
 theme_override_font_sizes/font_size = 40
 text = "Restart"
 
-[node name="Menu" type="Button" parent="Camera2D/UI/PauseScreen"]
+[node name="Menu" type="Button" parent="HUD/UI/PauseScreen"]
 visible = false
 layout_mode = 0
 offset_left = 749.0
@@ -143,23 +186,6 @@ theme_override_colors/font_pressed_color = Color(0.695503, 0.695503, 0.695503, 1
 theme_override_font_sizes/font_size = 40
 text = "Menu"
 
-[node name="Platform" parent="." instance=ExtResource("6_wcihk")]
-position = Vector2(-5, 220)
-
-[node name="Platform2" parent="." instance=ExtResource("6_wcihk")]
-position = Vector2(252, 129)
-
-[node name="Platform3" parent="." instance=ExtResource("6_wcihk")]
-position = Vector2(504, 27)
-
-[node name="Pause" type="Control" parent="."]
-process_mode = 3
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("9_sil7u")
-
-[connection signal="body_entered" from="Camera2D/Death" to="Pause" method="_on_death_body_entered"]
-[connection signal="button_up" from="Camera2D/UI/PauseScreen/Restart" to="Pause" method="_on_restart_button_up"]
-[connection signal="button_up" from="Camera2D/UI/PauseScreen/Menu" to="Pause" method="_on_menu_button_up"]
+[connection signal="body_entered" from="Game/Camera2D/Death" to="Game/Pause" method="_on_death_body_entered"]
+[connection signal="button_up" from="HUD/UI/PauseScreen/Restart" to="Game/Pause" method="_on_restart_button_up"]
+[connection signal="button_up" from="HUD/UI/PauseScreen/Menu" to="Game/Pause" method="_on_menu_button_up"]
