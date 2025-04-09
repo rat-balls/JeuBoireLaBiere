@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dq2ath804n4b7"]
 
 [ext_resource type="Texture2D" uid="uid://1wh7ibj82olq" path="res://Assets/Sprites/capsule 2.png" id="1_iqsx8"]
-[ext_resource type="Script" path="res://Scripts/platformSprite.cs" id="2_43vaw"]
+[ext_resource type="Script" path="res://Scripts/platformSprite.gd" id="2_0c00i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6eps0"]
 size = Vector2(37.3541, 8)
@@ -19,7 +19,7 @@ collision_mask = 4
 z_index = -1
 position = Vector2(1.90735e-06, 0.499999)
 texture = ExtResource("1_iqsx8")
-script = ExtResource("2_43vaw")
+script = ExtResource("2_0c00i")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
@@ -44,4 +44,3 @@ scale = Vector2(0.987, 0.121)
 shape = SubResource("CapsuleShape2D_kon2v")
 
 [connection signal="body_entered" from="Area2D" to="Sprite2D2" method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="Sprite2D2" method="_on_area_2d_body_exited"]

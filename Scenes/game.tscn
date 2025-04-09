@@ -1,25 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlxmd3r25i16x"]
+[gd_scene load_steps=12 format=3 uid="uid://dlxmd3r25i16x"]
 
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
-[ext_resource type="Script" path="res://Scripts/Camera2d.cs" id="2_ddfpk"]
+[ext_resource type="Script" path="res://Scripts/camera_2d.gd" id="2_3upla"]
 [ext_resource type="Texture2D" uid="uid://cg3max1qatald" path="res://Assets/Sprites/istockphoto-802636540-612x612.jpg" id="4_v3h4w"]
 [ext_resource type="Texture2D" uid="uid://bfc68j0gdq2o7" path="res://Assets/Sprites/beer-3804654_1280.webp" id="5_fwp6m"]
 [ext_resource type="Texture2D" uid="uid://d1g1pesvibsu6" path="res://Assets/Sprites/bière.png" id="6_7pg3a"]
 [ext_resource type="PackedScene" uid="uid://dq2ath804n4b7" path="res://Scenes/platform.tscn" id="6_wcihk"]
 [ext_resource type="Texture2D" uid="uid://cym647yuthn2d" path="res://Assets/Sprites/mousse.png" id="7_jxppo"]
-[ext_resource type="Script" path="res://Scripts/Score.cs" id="9_6jhyw"]
-[ext_resource type="Script" path="res://Scripts/Pause.cs" id="9_aucgh"]
-[ext_resource type="AudioStream" uid="uid://dtowyxf5leihj" path="res://Assets/Music/05 - Briganté.mp3" id="10_q3enl"]
-
-[sub_resource type="CSharpScript" id="CSharpScript_74inm"]
-script/source = "using Godot;
-using System;
-
-public partial class Death : Area2D
-{
-	
-}
-"
+[ext_resource type="Script" path="res://Scripts/score.gd" id="7_r51r2"]
+[ext_resource type="Script" path="res://Scripts/pause.gd" id="9_sil7u"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkde7"]
 
@@ -31,7 +20,7 @@ public partial class Death : Area2D
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
-script = ExtResource("2_ddfpk")
+script = ExtResource("2_3upla")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
 modulate = Color(0.619608, 0.619608, 0.639216, 1)
@@ -44,7 +33,6 @@ texture = ExtResource("4_v3h4w")
 position = Vector2(0, 282)
 collision_layer = 2
 collision_mask = 4
-script = SubResource("CSharpScript_74inm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Death"]
 position = Vector2(0, 269)
@@ -80,7 +68,6 @@ rotation = 1.58825
 shape = SubResource("WorldBoundaryShape2D_ydwrq")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="Camera2D"]
-stream = ExtResource("10_q3enl")
 volume_db = -5.0
 autoplay = true
 
@@ -99,7 +86,7 @@ offset_right = -749.0
 offset_bottom = -416.0
 theme_override_font_sizes/font_size = 39
 text = "Score : 0"
-script = ExtResource("9_6jhyw")
+script = ExtResource("7_r51r2")
 
 [node name="PauseScreen" type="ColorRect" parent="Camera2D/UI"]
 process_mode = 2
@@ -113,6 +100,7 @@ offset_bottom = 476.0
 color = Color(0, 0, 0, 0.572549)
 
 [node name="DrinkingProgress" type="Label" parent="Camera2D/UI/PauseScreen"]
+layout_mode = 0
 offset_left = 518.0
 offset_top = 433.0
 offset_right = 1136.0
@@ -170,9 +158,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("9_aucgh")
+script = ExtResource("9_sil7u")
 
-[connection signal="PauseSignal" from="CharacterBody2D" to="Pause" method="_on_character_body_2d_pause_signal"]
 [connection signal="body_entered" from="Camera2D/Death" to="Pause" method="_on_death_body_entered"]
 [connection signal="button_up" from="Camera2D/UI/PauseScreen/Restart" to="Pause" method="_on_restart_button_up"]
 [connection signal="button_up" from="Camera2D/UI/PauseScreen/Menu" to="Pause" method="_on_menu_button_up"]
