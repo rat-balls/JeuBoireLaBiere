@@ -9,7 +9,6 @@ func _process(delta):
 	if(Input.is_action_just_pressed("Pause")):
 		PauseGame();
 
-
 func PauseGame():
 	var paused = !get_tree().paused;
 	get_tree().paused = paused;

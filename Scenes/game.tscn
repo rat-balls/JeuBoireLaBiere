@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dlxmd3r25i16x"]
+[gd_scene load_steps=14 format=3 uid="uid://dlxmd3r25i16x"]
 
 [ext_resource type="PackedScene" uid="uid://b3dvjqhcm47os" path="res://Scenes/character.tscn" id="1_k4nsg"]
+[ext_resource type="Script" uid="uid://dase6q5v5u5o" path="res://Scripts/connect.gd" id="1_o5yvi"]
 [ext_resource type="Script" uid="uid://dcfuxp5md03dd" path="res://Scripts/camera_2d.gd" id="2_3upla"]
 [ext_resource type="Texture2D" uid="uid://cg3max1qatald" path="res://Assets/Sprites/istockphoto-802636540-612x612.jpg" id="4_v3h4w"]
 [ext_resource type="Texture2D" uid="uid://bfc68j0gdq2o7" path="res://Assets/Sprites/beer-3804654_1280.webp" id="5_fwp6m"]
@@ -9,16 +10,19 @@
 [ext_resource type="Texture2D" uid="uid://cym647yuthn2d" path="res://Assets/Sprites/mousse.png" id="7_jxppo"]
 [ext_resource type="Script" uid="uid://b3mwa5mf8t3tb" path="res://Scripts/score.gd" id="7_r51r2"]
 [ext_resource type="Script" uid="uid://w1pm0e3axyqp" path="res://Scripts/pause.gd" id="9_sil7u"]
+[ext_resource type="PackedScene" uid="uid://ktm7k0co2o7l" path="res://addons/mqtt/mqtt.tscn" id="10_ldgsr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkde7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ydwrq"]
 
 [node name="Control" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_o5yvi")
 
 [node name="BG" type="CanvasLayer" parent="."]
 layer = -15
@@ -35,6 +39,7 @@ grow_vertical = 2
 texture = ExtResource("4_v3h4w")
 
 [node name="Game" type="Node2D" parent="."]
+process_mode = 1
 
 [node name="CharacterBody2D" parent="Game" instance=ExtResource("1_k4nsg")]
 
@@ -115,6 +120,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Score" type="Label" parent="HUD/UI"]
+process_mode = 1
 z_index = 111
 layout_mode = 1
 offset_right = 157.0
@@ -186,6 +192,11 @@ theme_override_colors/font_pressed_color = Color(0.695503, 0.695503, 0.695503, 1
 theme_override_font_sizes/font_size = 40
 text = "Menu"
 
+[node name="MQTT" parent="." instance=ExtResource("10_ldgsr")]
+process_mode = 3
+
 [connection signal="body_entered" from="Game/Camera2D/Death" to="Game/Pause" method="_on_death_body_entered"]
 [connection signal="button_up" from="HUD/UI/PauseScreen/Restart" to="Game/Pause" method="_on_restart_button_up"]
 [connection signal="button_up" from="HUD/UI/PauseScreen/Menu" to="Game/Pause" method="_on_menu_button_up"]
+[connection signal="broker_connected" from="MQTT" to="." method="_on_mqtt_broker_connected"]
+[connection signal="received_message" from="MQTT" to="." method="_on_mqtt_received_message"]
