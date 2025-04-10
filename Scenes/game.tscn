@@ -131,6 +131,20 @@ theme_override_font_sizes/font_size = 39
 text = "Score : 0"
 script = ExtResource("7_r51r2")
 
+[node name="BeerLvl" type="Label" parent="HUD/UI"]
+process_mode = 1
+z_index = 111
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -166.0
+offset_right = -2.0
+offset_bottom = 54.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 39
+text = "Bière 0%"
+
 [node name="PauseScreen" type="ColorRect" parent="HUD/UI"]
 process_mode = 2
 visible = false

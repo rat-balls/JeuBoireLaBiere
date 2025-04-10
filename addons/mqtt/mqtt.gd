@@ -68,7 +68,8 @@ var common_name = null
 
 func senddata(data):
 	var E = 0
-	E = websocket.put_packet(data)
+	if(websocket != null):
+		E = websocket.put_packet(data)
 	if E != 0:
 		print("bad senddata packet E=", E)
 	

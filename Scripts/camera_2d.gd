@@ -12,6 +12,8 @@ var beerProg = -25;
 
 var irl_pos: Vector2;
 
+@onready var beer_lvl = $"../../HUD/UI/BeerLvl"
+
 func _ready():
 	platform = load("res://Scenes/platform.tscn");
 	beer = get_node("Death");
@@ -52,6 +54,7 @@ func SpawnPlatform(pos: Vector2):
 
 func _on_control_beer_level(amount):
 	print(amount)
+	beer_lvl.Text = str(amount) + "%";
 	var screenPos_amount = lerp(330.0, -330.0, amount / 100.0)
 	print(screenPos_amount)
 	irl_pos = Vector2(0, screenPos_amount - 200);
