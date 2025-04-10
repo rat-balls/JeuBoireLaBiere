@@ -3,8 +3,10 @@ extends Control
 var PauseScreen: ColorRect;
 
 @onready var mqtt = $"../../MQTT"
+var menu: PackedScene; 
 
 func _ready():
+	menu = load("res://Scenes/menu.tscn")
 	PauseScreen = get_parent().get_parent().get_node("HUD/UI/PauseScreen");
 
 func PauseGame():
@@ -28,9 +30,8 @@ func _on_restart_button_up():
 
 
 func _on_menu_button_up():
-	#TODO
-	pass
-
+	PauseGame();
+	get_tree().change_scene_to_packed(menu)
 
 func _on_control_pause():
 	PauseGame()

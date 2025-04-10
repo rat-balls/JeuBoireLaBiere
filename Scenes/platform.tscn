@@ -7,6 +7,7 @@
 size = Vector2(37.3541, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kmae"]
+size = Vector2(43.8858, 20)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kon2v"]
 radius = 43.5664
@@ -28,7 +29,7 @@ shape = SubResource("RectangleShape2D_6eps0")
 one_way_collision = true
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(0, 37)
+position = Vector2(0.499999, 37)
 scale = Vector2(1.98242, 0.433329)
 shape = SubResource("RectangleShape2D_5kmae")
 one_way_collision = true

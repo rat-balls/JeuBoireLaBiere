@@ -49,13 +49,27 @@ process_callback = 0
 script = ExtResource("2_3upla")
 
 [node name="Death" type="Area2D" parent="Game/Camera2D"]
-position = Vector2(0, 282)
+position = Vector2(0, 406)
 collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Camera2D/Death"]
 position = Vector2(0, 269)
 shape = SubResource("WorldBoundaryShape2D_gkde7")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Game/Camera2D/Death"]
+modulate = Color(1, 1, 1, 0.858824)
+z_index = 10
+position = Vector2(314.476, 671)
+scale = Vector2(2.91503, 1.28993)
+texture = ExtResource("6_7pg3a")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Game/Camera2D/Death"]
+modulate = Color(1, 1, 1, 0.717647)
+z_index = 10
+position = Vector2(-22.5241, 99.75)
+scale = Vector2(2.91503, 1.28491)
+texture = ExtResource("7_jxppo")
 
 [node name="Sprite2D" type="Sprite2D" parent="Game/Camera2D/Death"]
 visible = false
@@ -64,20 +78,6 @@ z_index = 10
 position = Vector2(205, 579)
 scale = Vector2(2.91503, 1)
 texture = ExtResource("5_fwp6m")
-
-[node name="Sprite2D3" type="Sprite2D" parent="Game/Camera2D/Death"]
-modulate = Color(1, 1, 1, 0.858824)
-z_index = 10
-position = Vector2(313.476, 581)
-scale = Vector2(2.91503, 1)
-texture = ExtResource("6_7pg3a")
-
-[node name="Sprite2D2" type="Sprite2D" parent="Game/Camera2D/Death"]
-modulate = Color(1, 1, 1, 0.6)
-z_index = 10
-position = Vector2(-23.524, 139)
-scale = Vector2(2.91503, 1)
-texture = ExtResource("7_jxppo")
 
 [node name="LeftBorder" type="StaticBody2D" parent="Game/Camera2D"]
 position = Vector2(-813, 0)

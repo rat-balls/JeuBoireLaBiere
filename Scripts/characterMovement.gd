@@ -12,7 +12,7 @@ var jumped = false;
 
 var coyoteAvailable = false;
 
-signal pause;
+signal _pause;
 
 @onready var mqtt = $"../../MQTT"
 var fakeLvl = 0;
