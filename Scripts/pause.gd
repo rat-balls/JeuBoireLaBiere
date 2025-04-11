@@ -48,7 +48,7 @@ func Restart():
 	PauseGame(2);
 
 func _on_menu_button_up():
-	PauseGame(2);
+	PauseGame(1);
 	get_tree().change_scene_to_packed(menu)
 
 func _on_control_lift():
