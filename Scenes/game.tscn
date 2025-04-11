@@ -89,7 +89,6 @@ shape = SubResource("WorldBoundaryShape2D_ydwrq")
 [node name="Music" type="AudioStreamPlayer2D" parent="Game/Camera2D"]
 stream = ExtResource("8_rku1e")
 volume_db = -6.486
-autoplay = true
 
 [node name="Platform" parent="Game" instance=ExtResource("6_wcihk")]
 position = Vector2(-5, 220)

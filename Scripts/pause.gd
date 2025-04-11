@@ -9,11 +9,16 @@ func _ready():
 	menu = load("res://Scenes/menu.tscn")
 	PauseScreen = get_parent().get_parent().get_node("HUD/UI/PauseScreen");
 
+func _process(delta):
+	if(get_tree().paused == true && Input.is_action_just_pressed("Restart")):
+		Restart()
+
 func PauseGame():
 	var paused = !get_tree().paused;
 	get_tree().paused = paused;
 	PauseScreen.visible = paused;
 	mqtt.publish("jeuboire/pump", "pause")
+
 
 func _on_death_body_entered(body: Node2D):
 	if(body.get_groups()[0].contains("Player")):
@@ -25,9 +30,11 @@ func _on_death_body_entered(body: Node2D):
 
 
 func _on_restart_button_up():
+	Restart()
+
+func Restart():
 	get_tree().call_deferred("reload_current_scene");
 	PauseGame();
-
 
 func _on_menu_button_up():
 	PauseGame();

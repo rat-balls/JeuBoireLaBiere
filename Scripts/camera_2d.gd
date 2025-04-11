@@ -54,7 +54,7 @@ func SpawnPlatform(pos: Vector2):
 
 func _on_control_beer_level(amount):
 	print(amount)
-	beer_lvl.Text = str(amount) + "%";
+	beer_lvl.text = "Bière " + str((int)(amount)) + "%";
 	var screenPos_amount = lerp(330.0, -330.0, amount / 100.0)
 	print(screenPos_amount)
 	irl_pos = Vector2(0, screenPos_amount - 200);
