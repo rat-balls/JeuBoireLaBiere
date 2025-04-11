@@ -211,7 +211,6 @@ text = "Menu"
 process_mode = 3
 
 [connection signal="beerLevel" from="." to="Game/Camera2D" method="_on_control_beer_level"]
-[connection signal="pause" from="." to="Game/Pause" method="_on_control_pause"]
 [connection signal="body_entered" from="Game/Camera2D/Death" to="Game/Pause" method="_on_death_body_entered"]
 [connection signal="button_up" from="HUD/UI/PauseScreen/Restart" to="Game/Pause" method="_on_restart_button_up"]
 [connection signal="button_up" from="HUD/UI/PauseScreen/Menu" to="Game/Pause" method="_on_menu_button_up"]

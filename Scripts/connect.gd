@@ -3,7 +3,8 @@ extends Control
 @onready var mqtt:  = $MQTT
 
 signal beerLevel(amount)
-signal pause()
+signal lift()
+signal putback()
 
 func _ready():
 	mqtt.set_user_pass("pluton3", "nabil")
@@ -15,8 +16,11 @@ func _on_mqtt_received_message(topic, message):
 		beerLevel.emit(message.to_float())
 	elif(topic == "jeuboire/pump"):
 		if(message == "lift"):
-			pause.emit()
+			lift.emit()
+		if(message == "putback"):
+			putback.emit()
 
 func _on_mqtt_broker_connected():
 	mqtt.subscribe("jeuboire/beerLvl")
 	mqtt.subscribe("jeuboire/pump")
+	mqtt.publish("jeuboire/pump", "unpause")
