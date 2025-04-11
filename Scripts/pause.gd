@@ -10,6 +10,7 @@ enum PAUSED {TOGGLE, PAUSE, UNPAUSE}
 func _ready():
 	menu = load("res://Scenes/menu.tscn")
 	PauseScreen = get_parent().get_parent().get_node("HUD/UI/PauseScreen");
+	PauseGame(2);
 
 func _process(delta):
 	if(get_tree().paused == true && Input.is_action_just_pressed("Restart")):
@@ -44,8 +45,8 @@ func _on_restart_button_up():
 	Restart()
 
 func Restart():
-	get_tree().call_deferred("reload_current_scene");
 	PauseGame(2);
+	get_tree().call_deferred("reload_current_scene");
 
 func _on_menu_button_up():
 	PauseGame(1);
