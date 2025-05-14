@@ -17,7 +17,7 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ydwrq"]
 
-[node name="Control" type="Control"]
+[node name="GameScene" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
